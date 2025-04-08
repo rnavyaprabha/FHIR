@@ -1,0 +1,33 @@
+{
+    "resourceType": "Patient",
+    "name": [
+        {
+            "use": "official",
+            "given": ["Sarah"],
+            "family": "Johnson"
+        }
+    ],
+    "gender": "female",
+    "birthDate": "1984-03-15",
+    "telecom": [
+        {
+            "value": "+1 (312) 555-7890",
+            "use":"mobile",
+            "system": "phone"
+
+        },
+        {
+            "value": "sarah.johnson84@example.com",
+            "system": "email"
+        }
+    ],
+    "address": [
+        {
+            "line": ["742 Evergreen Terrace"],
+            "city": " Springfield",
+            "state": "IL",
+            "postalCode": "62704"
+        }
+
+    ]
+}
