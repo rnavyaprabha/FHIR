@@ -1,0 +1,25 @@
+{
+    "resourceType": "Observation",
+    "status": "corrected",
+    "code": {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "15074-8",
+          "display": "Glucose [Moles/volume] in Blood"
+        }
+      ],
+      "text": "Blood Glucose"
+    },
+    "subject": {
+      "reference": "Patient/46911466",
+      "display": "Sarah Johnson"
+    },
+    "valueQuantity": {
+      "value": 4.3,
+      "unit": "mmol/L",
+      "system": "http://unitsofmeasure.org",
+      "code": "mmol/L"
+    }
+  }
+  
