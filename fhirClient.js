@@ -38,6 +38,28 @@ async function deletePatient(id) {
   await axios.delete(`${FHIR_BASE_URL}/Patient/${id}`);
   console.log(`🗑️ Patient ${id} deleted.`);
 }
+// Update patient's phone number
+async function updatePatientPhone(id, newPhone) {
+  try {
+    // Fetch existing patient
+    const res = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`);
+    const patientData = res.data;
+
+    // Update telecom field with new phone
+    patientData.telecom = [{
+      system: 'phone',
+      use: 'mobile',
+      value: newPhone
+    }];
+
+    // Send updated patient data
+    const updateRes = await axios.put(`${FHIR_BASE_URL}/Patient/${id}`, patientData);
+    console.log(`📞 Updated Patient ${id} phone to ${newPhone}`);
+  } catch (err) {
+    console.error("❌ Update Error:", err.response?.data || err.message);
+  }
+}
+
 
 // Main function to run the client
 (async () => {
@@ -45,9 +67,16 @@ async function deletePatient(id) {
     const patientId = await createPatient();
     await createObservation(patientId);
     await getPatient(patientId);
+
+    // ✅ Update patient's phone number here
+    await updatePatientPhone(patientId, '+1 (999) 123-4567');
+
+    await getPatient(patientId); // Check update
     await searchPatientByName('Sarah');
+
     // await deletePatient(patientId); // Uncomment to clean up
   } catch (error) {
     console.error('❌ Error:', error.response?.data || error.message);
   }
 })();
+
