@@ -1,0 +1,23 @@
+{
+  "name": "PATIENT",
+  "version": "1.0.0",
+  "description": "Trying to understand more about FHIR SERVER and functionalities related to FHIR SERVER",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rnavyaprabha/FHIR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rnavyaprabha/FHIR/issues"
+  },
+  "homepage": "https://github.com/rnavyaprabha/FHIR#readme",
+  "dependencies": {
+    "axios": "^1.8.4"
+  }
+}
