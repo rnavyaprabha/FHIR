@@ -1,9 +1,10 @@
 {
-  "name": "PATIENT",
+  "name": "fhir-demo",
   "version": "1.0.0",
   "description": "Trying to understand more about FHIR SERVER and functionalities related to FHIR SERVER",
-  "main": "index.js",
+  "main": "fhirServer.js",
   "scripts": {
+    "start": "node fhirServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,8 @@
   },
   "homepage": "https://github.com/rnavyaprabha/FHIR#readme",
   "dependencies": {
-    "axios": "^1.8.4"
+    "axios": "^1.8.4",
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
   }
 }
