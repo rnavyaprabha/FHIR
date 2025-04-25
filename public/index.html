@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FHIR CRUD Demo</title>
+</head>
+<body>
+  <h1>FHIR CRUD Demo</h1>
+
+  <!-- Create Patient -->
+  <section>
+    <h2>Create Patient</h2>
+    <button id="btnCreate">Create Default Patient</button>
+    <div id="createResult"></div>
+  </section>
+
+  <!-- Get Patient -->
+  <section>
+    <h2>Get Patient by ID</h2>
+    <input id="inputGetId" placeholder="Enter patient ID" />
+    <button id="btnGet">Get Patient</button>
+    <pre id="getResult"></pre>
+  </section>
+
+  <!-- Search Patient -->
+  <section>
+    <h2>Search Patient by Name</h2>
+    <input id="inputSearchName" placeholder="e.g. Sarah" />
+    <button id="btnSearch">Search</button>
+    <pre id="searchResult"></pre>
+  </section>
+
+  <!-- Update Phone -->
+  <section>
+    <h2>Update Patient Phone</h2>
+    <input id="inputUpdId" placeholder="Patient ID" />
+    <input id="inputPhone" placeholder="New phone" />
+    <button id="btnUpdate">Update Phone</button>
+    <div id="updateResult"></div>
+  </section>
+
+  <!-- Delete Patient -->
+  <section>
+    <h2>Delete Patient</h2>
+    <input id="inputDelId" placeholder="Patient ID" />
+    <button id="btnDelete">Delete</button>
+    <div id="deleteResult"></div>
+  </section>
+
+  <!-- Create Observation -->
+  <section>
+    <h2>Create Observation</h2>
+    <input id="inputObsPid" placeholder="Patient ID" />
+    <button id="btnObs">Create Observation</button>
+    <div id="obsResult"></div>
+  </section>
+  <section>
+    <h2>List Observations</h2>
+    <input id="inputListPid" placeholder="Patient ID" />
+    <button id="btnListObs">Fetch Observations</button>
+    <pre id="listObsResult"></pre>
+  </section>
+  
+
+  <script src="app.js"></script>
+</body>
+</html>
