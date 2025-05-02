@@ -60,3 +60,38 @@ document.getElementById('btnListObs').onclick = async () => {
   const data = await res.json();
   document.getElementById('listObsResult').textContent = JSON.stringify(data, null, 2);
 };
+document.getElementById('customPatientForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const form = e.target;
+
+  const patientData = {
+    resourceType: "Patient",
+    name: [{
+      use: "official",
+      given: [form.firstName.value],
+      family: form.lastName.value
+    }],
+    gender: form.gender.value,
+    birthDate: form.birthDate.value,
+    telecom: [
+      { system: "phone", use: "mobile", value: form.phone.value },
+      { system: "email", value: form.email.value }
+    ],
+    address: [{
+      line: [form.addressLine.value],
+      city: form.city.value,
+      state: form.state.value,
+      postalCode: form.postalCode.value
+    }]
+  };
+
+  const res = await fetch('/api/patient', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(patientData)
+  });
+
+  const result = await res.json();
+  document.getElementById('customCreateResult').textContent =
+    res.ok ? `✅ Patient created with ID: ${result.id}` : `❌ Error: ${result.error}`;
+});
