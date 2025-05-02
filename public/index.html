@@ -6,7 +6,27 @@
 </head>
 <body>
   <h1>FHIR CRUD Demo</h1>
-
+  <section>
+    <h2>Create Custom Patient</h2>
+    <form id="customPatientForm">
+      <input name="firstName" placeholder="First name" required />
+      <input name="lastName" placeholder="Last name" required />
+      <select name="gender">
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+      </select>
+      <input name="birthDate" type="date" required />
+      <input name="phone" placeholder="Phone number" required />
+      <input name="email" type="email" placeholder="Email" required />
+      <input name="addressLine" placeholder="Street Address" required />
+      <input name="city" placeholder="City" required />
+      <input name="state" placeholder="State" required />
+      <input name="postalCode" placeholder="Postal Code" required />
+      <button type="submit">Submit Patient</button>
+    </form>
+    <div id="customCreateResult"></div>
+  </section>
+  
   <!-- Create Patient -->
   <section>
     <h2>Create Patient</h2>
