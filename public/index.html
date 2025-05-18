@@ -74,22 +74,21 @@
     <button id="btnObs">Create Observation</button>
     <div id="obsResult"></div>
   </section>
+  <!-- Custom Create Observation -->
+<section>
+  <h2>Create Custom Observation</h2>
+  <form id="customObsForm">
+    <input name="patientId" placeholder="Patient ID" required />
+    <input name="obsCode" placeholder="Observation Code (e.g., heart-rate)" required />
+    <input name="obsDisplay" placeholder="Display (e.g., Heart Rate)" required />
+    <input name="obsValue" placeholder="Value (e.g., 72)" required />
+    <input name="obsUnit" placeholder="Unit (e.g., bpm)" required />
+    <button type="submit">Submit Observation</button>
+  </form>
+  <div id="customObsResult"></div>
+</section>
+
   <section>
-     <!-- 🔽 NEW: Create Custom Observation -->
-  <section>
-    <h2>Create Custom Observation</h2>
-    <form id="customObsForm">
-      <input name="patientId" placeholder="Patient ID" required />
-      <input name="code" placeholder="Observation Code (e.g. 15074-8)" required />
-      <input name="display" placeholder="Display Name (e.g. Glucose)" required />
-      <input name="value" type="number" step="any" placeholder="Value (e.g. 98.6)" required />
-      <input name="unit" placeholder="Unit (e.g. mg/dL)" required />
-      <input name="system" placeholder="Coding System (e.g. http://loinc.org)" required />
-      <input name="effectiveDateTime" type="datetime-local" required />
-      <button type="submit">Submit Observation</button>
-    </form>
-    <div id="customObsResult"></div>
-  </section>
     <h2>List Observations</h2>
     <input id="inputListPid" placeholder="Patient ID" />
     <button id="btnListObs">Fetch Observations</button>
