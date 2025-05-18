@@ -5,28 +5,29 @@ function show(el, data) {
   document.getElementById(el).textContent = JSON.stringify(data, null, 2);
 }
 
-// Default Create
+
+// Create
 document.getElementById('btnCreate').onclick = async () => {
   const res = await fetch(`${base}/patient`, { method: 'POST', headers:{'Content-Type':'application/json'} });
   const data = await res.json();
   document.getElementById('createResult').textContent = 'Created ID: ' + data.id;
 };
 
-// Get Patient
+// Get
 document.getElementById('btnGet').onclick = async () => {
   const id = document.getElementById('inputGetId').value;
   const res = await fetch(`${base}/patient/${id}`);
   show('getResult', await res.json());
 };
 
-// Search Patient
+// Search
 document.getElementById('btnSearch').onclick = async () => {
   const name = document.getElementById('inputSearchName').value;
   const res = await fetch(`${base}/patient?name=${name}`);
   show('searchResult', await res.json());
 };
 
-// Update Phone
+// Update
 document.getElementById('btnUpdate').onclick = async () => {
   const id = document.getElementById('inputUpdId').value;
   const phone = document.getElementById('inputPhone').value;
@@ -38,13 +39,20 @@ document.getElementById('btnUpdate').onclick = async () => {
   document.getElementById('updateResult').textContent = res.ok ? '✅ Updated' : '❌ Failed';
 };
 
-// Delete Patient
+// Delete
 document.getElementById('btnDelete').onclick = async () => {
   const id = document.getElementById('inputDelId').value;
   const res = await fetch(`${base}/patient/${id}`, { method: 'DELETE' });
   document.getElementById('deleteResult').textContent = res.ok ? '🗑️ Deleted' : '❌ Failed';
 };
 
+// Create Observation
+document.getElementById('btnObs').onclick = async () => {
+  const pid = document.getElementById('inputObsPid').value;
+  const res = await fetch(`${base}/observation/${pid}`, { method: 'POST', headers:{'Content-Type':'application/json'} });
+  const data = await res.json();
+  document.getElementById('obsResult').textContent = 'Obs Created: ' + data.id;
+};
 // Custom Patient Form Submission
 document.getElementById('customPatientForm').addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -71,7 +79,7 @@ document.getElementById('customPatientForm').addEventListener('submit', async fu
     }]
   };
 
-  const res = await fetch(`${base}/patient`, {
+  const res = await fetch('/api/patient', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(patientData)
@@ -81,46 +89,44 @@ document.getElementById('customPatientForm').addEventListener('submit', async fu
   document.getElementById('customCreateResult').textContent =
     res.ok ? `✅ Patient created with ID: ${result.id}` : `❌ Error: ${result.error}`;
 });
-
 // Custom Observation Form Submission
-document.getElementById('obsForm').addEventListener('submit', async function (e) {
+
+document.getElementById('customObsForm').addEventListener('submit', async function (e) {
   e.preventDefault();
   const form = e.target;
 
-  const observationData = {
+  const observation = {
     resourceType: "Observation",
     status: "final",
     code: {
       coding: [{
         system: "http://loinc.org",
-        code: form.code.value,
-        display: form.display.value
-      }],
-      text: form.display.value
+        code: form.obsCode.value,
+        display: form.obsDisplay.value
+      }]
     },
     valueQuantity: {
-      value: parseFloat(form.value.value),
-      unit: form.unit.value,
-      system: "http://unitsofmeasure.org",
-      code: form.unit.value
+      value: parseFloat(form.obsValue.value),
+      unit: form.obsUnit.value,
+      system: "http://unitsofmeasure.org"
     }
   };
 
   const res = await fetch(`${base}/observation/${form.patientId.value}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(observationData)
+    body: JSON.stringify(observation)
   });
 
   const result = await res.json();
-  document.getElementById('obsResult').textContent =
-    res.ok ? `✅ Observation created with ID: ${result.id}` : `❌ Error: ${result.error || 'Unknown error'}`;
+  document.getElementById('customObsResult').textContent =
+    res.ok ? `✅ Observation created with ID: ${result.id}` : `❌ Error: ${result.error || res.status}`;
 });
 
 // List Observations
 document.getElementById('btnListObs').onclick = async () => {
   const pid = document.getElementById('inputListPid').value;
-  const res = await fetch(`${base}/observations/${pid}`);
+  const res = await fetch(`/api/observations/${pid}`);
   const data = await res.json();
   document.getElementById('listObsResult').textContent = JSON.stringify(data, null, 2);
 };
