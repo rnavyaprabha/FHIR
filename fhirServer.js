@@ -26,6 +26,22 @@ app.post('/api/patient', async (req, res) => {
   }
 });
 
+// Express route handler
+app.post('/api/import-fhir', async (req, res) => {
+  try {
+    const resource = req.body;
+    if (!resource || !resource.resourceType) {
+      return res.status(400).json({ error: 'Invalid FHIR resource' });
+    }
+
+    const response = await axios.post(`${FHIR_BASE_URL}/${resource.resourceType}`, resource);
+    res.json({ id: response.data.id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to import resource' });
+  }
+});
+
 // READ Patient by ID
 app.get('/api/patient/:id', async (req, res) => {
   try {
