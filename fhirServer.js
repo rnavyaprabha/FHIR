@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios');
+const FHIR_BASE_URL = 'https://r4.smarthealthit.org'; // or another FHIR server you're using
 
 // import your existing fhirClient functions
 const {
@@ -13,7 +15,7 @@ const {
 } = require('./fhirClient');
 
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // CREATE Patient
@@ -26,21 +28,36 @@ app.post('/api/patient', async (req, res) => {
   }
 });
 
-// Express route handler
 app.post('/api/import-fhir', async (req, res) => {
+  const resource = req.body;
+
+  if (!resource || !resource.resourceType) {
+    return res.status(400).json({ error: 'Missing or invalid resourceType' });
+  }
+
   try {
-    const resource = req.body;
-    if (!resource || !resource.resourceType) {
-      return res.status(400).json({ error: 'Invalid FHIR resource' });
+    // Handle bundle
+    if (resource.resourceType === 'Bundle') {
+      const result = await axios.post(`${FHIR_BASE_URL}`, resource, {
+        headers: { 'Content-Type': 'application/fhir+json' }
+      });
+      return res.json({ id: result.data.id, message: 'Bundle imported successfully' });
     }
 
-    const response = await axios.post(`${FHIR_BASE_URL}/${resource.resourceType}`, resource);
-    res.json({ id: response.data.id });
+    // Handle single resource
+    const result = await axios.post(`${FHIR_BASE_URL}/${resource.resourceType}`, resource, {
+      headers: { 'Content-Type': 'application/fhir+json' }
+    });
+
+    res.json({ id: result.data.id, message: `${resource.resourceType} imported successfully` });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to import resource' });
-  }
+  console.error('Import error:', err.response?.data || err.message);
+  res.status(500).json({ error: err.response?.data || { message: err.message } });
+}
+
 });
+
 
 // READ Patient by ID
 app.get('/api/patient/:id', async (req, res) => {
