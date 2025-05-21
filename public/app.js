@@ -12,6 +12,38 @@ document.getElementById('btnCreate').onclick = async () => {
   const data = await res.json();
   document.getElementById('createResult').textContent = 'Created ID: ' + data.id;
 };
+document.getElementById('btnUploadSynthea').onclick = async () => {
+  const fileInput = document.getElementById('syntheaFile');
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Please select a JSON file first.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async function(event) {
+    try {
+      const fhirResource = JSON.parse(event.target.result);
+
+      const res = await fetch('/api/import-fhir', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fhirResource)
+      });
+
+      const result = await res.json();
+      document.getElementById('uploadResult').textContent =
+        res.ok ? `✅ Imported: ${result.id}` : `❌ Error: ${result.error}`;
+    } catch (err) {
+      console.error(err);
+      alert("Invalid JSON file.");
+    }
+  };
+
+  reader.readAsText(file);
+};
+
 
 // Get
 document.getElementById('btnGet').onclick = async () => {
