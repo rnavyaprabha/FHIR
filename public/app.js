@@ -33,8 +33,13 @@ document.getElementById('btnUploadSynthea').onclick = async () => {
       });
 
       const result = await res.json();
-      document.getElementById('uploadResult').textContent =
-        res.ok ? `✅ Imported: ${result.id}` : `❌ Error: ${result.error}`;
+      if (res.ok) {
+  document.getElementById('uploadResult').textContent = `✅ Imported: ${result.id || result.message}`;
+} else {
+  const errorText = result.error?.issue?.[0]?.diagnostics || JSON.stringify(result.error || result);
+  document.getElementById('uploadResult').textContent = `❌ Error: ${errorText}`;
+}
+
     } catch (err) {
       console.error(err);
       alert("Invalid JSON file.");
