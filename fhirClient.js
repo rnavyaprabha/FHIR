@@ -4,8 +4,10 @@ const fs    = require('fs');
 const path  = require('path');
 const axios = require('axios');
 
-const FHIR_BASE_URL = 'https://r4.smarthealthit.org';
+//const FHIR_BASE_URL = 'http://hapi.fhir.org/baseR4'; // or another FHIR server you're using
+//const FHIR_BASE_URL = 'http://localhost:8080/fhir';
 
+const FHIR_BASE_URL = 'https://r4.smarthealthit.org';
 // helper to load a JSON fixture from disk
 function loadFixture(fileName) {
   const fullPath = path.join(__dirname, fileName);
