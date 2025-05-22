@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const FHIR_BASE_URL = 'https://r4.smarthealthit.org'; // or another FHIR server you're using
+const FHIR_BASE_URL = 'http://hapi.fhir.org/baseR4'; // or another FHIR server you're using
 
 // import your existing fhirClient functions
 const {
