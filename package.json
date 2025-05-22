@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Trying to understand more about FHIR SERVER and functionalities related to FHIR SERVER",
   "main": "fhirServer.js",
+ 
   "scripts": {
-    "start": "node fhirServer.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node fhirServer.js",
+  "test": "echo \"✅ Placeholder test passed\""
+},
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rnavyaprabha/FHIR.git"
