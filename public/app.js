@@ -24,77 +24,42 @@ document.getElementById('btnUploadSynthea').onclick = async () => {
   const reader = new FileReader();
   reader.onload = async function(event) {
     try {
-      const fhirResource = JSON.parse(event.target.result);
+      const bundle = JSON.parse(event.target.result);
 
-        // Function to deeply replace references
-   const REFERENCE_TO_REPLACE = "Practitioner?identifier=http://hl7.org/fhir/sid/us-npi|9999936997";
-  const PLACEHOLDER_REFERENCE = "urn:uuid:practitioner-1";
-
-  function replaceReferences(obj) {
-    if (Array.isArray(obj)) {
-      obj.forEach(replaceReferences);
-    } else if (typeof obj === 'object' && obj !== null) {
-      for (const key in obj) {
-        if (key === "reference" && obj[key] === REFERENCE_TO_REPLACE) {
-          obj[key] = PLACEHOLDER_REFERENCE;
-        } else {
-          replaceReferences(obj[key]);
-        }
+      if (bundle.resourceType !== "Bundle" || !Array.isArray(bundle.entry)) {
+        throw new Error("Invalid FHIR Bundle");
       }
-    }
-  }
 
-  replaceReferences(fhirResource);
+      const patientEntry = bundle.entry.find(e => e.resource?.resourceType === "Patient");
+      if (!patientEntry) {
+        throw new Error("No Patient resource found in the bundle");
+      }
 
-  // Add Practitioner placeholder entry if not already present
-  if (fhirResource.resourceType === "Bundle" && Array.isArray(fhirResource.entry)) {
-    const practitionerExists = fhirResource.entry.some(
-      entry => entry.fullUrl === PLACEHOLDER_REFERENCE
-    );
+      const patientResource = patientEntry.resource;
 
-    if (!practitionerExists) {
-      fhirResource.entry.push({
-        fullUrl: PLACEHOLDER_REFERENCE,
-        resource: {
-          resourceType: "Practitioner",
-          identifier: [{
-            system: "http://hl7.org/fhir/sid/us-npi",
-            value: "9999936997"
-          }],
-          name: [{
-            family: "Placeholder",
-            given: ["Practitioner"]
-          }]
-        },
-        request: {
-          method: "POST",
-          url: "Practitioner"
-        }
+      const res = await fetch('/api/import-fhir', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(patientResource)
       });
+
+      const result = await res.json();
+      if (res.ok) {
+        document.getElementById('uploadResult').textContent = `✅ Imported Patient ID: ${result.id || result.message}`;
+      } else {
+        const errorText = result.error?.issue?.[0]?.diagnostics || JSON.stringify(result.error || result);
+        document.getElementById('uploadResult').textContent = `❌ Error: ${errorText}`;
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Error processing the JSON file: " + err.message);
     }
-  }
-
-  const res = await fetch('/api/import-fhir', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(fhirResource)
-  });
-
-  const result = await res.json();
-  if (res.ok) {
-    document.getElementById('uploadResult').textContent = `✅ Imported: ${result.id || result.message}`;
-  } else {
-    const errorText = result.error?.issue?.[0]?.diagnostics || JSON.stringify(result.error || result);
-    document.getElementById('uploadResult').textContent = `❌ Error: ${errorText}`;
-  }
-} catch (err) {
-  console.error(err);
-  alert("Invalid JSON file.");
-}
-};
+  };
 
   reader.readAsText(file);
 };
+
 
 
 // Get
