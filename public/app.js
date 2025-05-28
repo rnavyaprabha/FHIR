@@ -24,30 +24,42 @@ document.getElementById('btnUploadSynthea').onclick = async () => {
   const reader = new FileReader();
   reader.onload = async function(event) {
     try {
-      const fhirResource = JSON.parse(event.target.result);
+      const bundle = JSON.parse(event.target.result);
+
+      if (bundle.resourceType !== "Bundle" || !Array.isArray(bundle.entry)) {
+        throw new Error("Invalid FHIR Bundle");
+      }
+
+      const patientEntry = bundle.entry.find(e => e.resource?.resourceType === "Patient");
+      if (!patientEntry) {
+        throw new Error("No Patient resource found in the bundle");
+      }
+
+      const patientResource = patientEntry.resource;
 
       const res = await fetch('/api/import-fhir', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fhirResource)
+        body: JSON.stringify(patientResource)
       });
 
       const result = await res.json();
       if (res.ok) {
-  document.getElementById('uploadResult').textContent = `✅ Imported: ${result.id || result.message}`;
-} else {
-  const errorText = result.error?.issue?.[0]?.diagnostics || JSON.stringify(result.error || result);
-  document.getElementById('uploadResult').textContent = `❌ Error: ${errorText}`;
-}
+        document.getElementById('uploadResult').textContent = `✅ Imported Patient ID: ${result.id || result.message}`;
+      } else {
+        const errorText = result.error?.issue?.[0]?.diagnostics || JSON.stringify(result.error || result);
+        document.getElementById('uploadResult').textContent = `❌ Error: ${errorText}`;
+      }
 
     } catch (err) {
       console.error(err);
-      alert("Invalid JSON file.");
+      alert("Error processing the JSON file: " + err.message);
     }
   };
 
   reader.readAsText(file);
 };
+
 
 
 // Get
