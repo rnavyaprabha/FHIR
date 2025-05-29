@@ -1,1 +1,9 @@
 node_modules/
+# Ignore the Synthea JAR file
+synthea-with-dependencies.jar
+
+# Ignore manually generated output folders
+output-test/
+
+*.git
+git-filter-repo.py
