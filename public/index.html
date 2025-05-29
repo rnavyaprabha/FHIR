@@ -6,6 +6,22 @@
 </head>
 <body>
   <h1>FHIR CRUD Demo</h1>
+
+  <!-- Generate Patient (Synthea Integration) -->
+  <section>
+    <h2>Generate Patient with Synthea</h2>
+    <button id="btnGeneratePatient">Generate Patient</button>
+    <pre id="uploadResult"></pre>
+  </section>
+
+  <!-- Import from Synthea file -->
+  <section>
+    <h2>Import Synthea FHIR File</h2>
+    <input type="file" id="syntheaFile" accept=".json" />
+    <button id="btnUploadSynthea">Upload</button>
+  </section>
+
+  <!-- Create Custom Patient -->
   <section>
     <h2>Create Custom Patient</h2>
     <form id="customPatientForm">
@@ -27,17 +43,12 @@
     <div id="customCreateResult"></div>
   </section>
   
-  <!-- Create Patient -->
+  <!-- Create Default Patient -->
   <section>
-    <h2>Create Patient</h2>
+    <h2>Create Default Patient</h2>
     <button id="btnCreate">Create Default Patient</button>
     <div id="createResult"></div>
   </section>
-
-  <h2>Import Synthea FHIR File</h2>
-<input type="file" id="syntheaFile" accept=".json" />
-<button id="btnUploadSynthea">Upload</button>
-<pre id="uploadResult"></pre>
 
   <!-- Get Patient -->
   <section>
@@ -55,7 +66,7 @@
     <pre id="searchResult"></pre>
   </section>
 
-  <!-- Update Phone -->
+  <!-- Update Patient -->
   <section>
     <h2>Update Patient Phone</h2>
     <input id="inputUpdId" placeholder="Patient ID" />
@@ -79,27 +90,28 @@
     <button id="btnObs">Create Observation</button>
     <div id="obsResult"></div>
   </section>
-  <!-- Custom Create Observation -->
-<section>
-  <h2>Create Custom Observation</h2>
-  <form id="customObsForm">
-    <input name="patientId" placeholder="Patient ID" required />
-    <input name="obsCode" placeholder="Observation Code (e.g., heart-rate)" required />
-    <input name="obsDisplay" placeholder="Display (e.g., Heart Rate)" required />
-    <input name="obsValue" placeholder="Value (e.g., 72)" required />
-    <input name="obsUnit" placeholder="Unit (e.g., bpm)" required />
-    <button type="submit">Submit Observation</button>
-  </form>
-  <div id="customObsResult"></div>
-</section>
 
+  <!-- Create Custom Observation -->
+  <section>
+    <h2>Create Custom Observation</h2>
+    <form id="customObsForm">
+      <input name="patientId" placeholder="Patient ID" required />
+      <input name="obsCode" placeholder="Observation Code (e.g., heart-rate)" required />
+      <input name="obsDisplay" placeholder="Display (e.g., Heart Rate)" required />
+      <input name="obsValue" placeholder="Value (e.g., 72)" required />
+      <input name="obsUnit" placeholder="Unit (e.g., bpm)" required />
+      <button type="submit">Submit Observation</button>
+    </form>
+    <div id="customObsResult"></div>
+  </section>
+
+  <!-- List Observations -->
   <section>
     <h2>List Observations</h2>
     <input id="inputListPid" placeholder="Patient ID" />
     <button id="btnListObs">Fetch Observations</button>
     <pre id="listObsResult"></pre>
   </section>
-  
 
   <script src="app.js"></script>
 </body>
