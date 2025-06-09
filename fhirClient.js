@@ -1,124 +1,110 @@
-// fhirClient.js
-
-const fs    = require('fs');
-const path  = require('path');
+const fs = require('fs');
+const path = require('path');
 const axios = require('axios');
 
-//const FHIR_BASE_URL = 'http://hapi.fhir.org/baseR4'; // or another FHIR server you're using
-//const FHIR_BASE_URL = 'http://localhost:8080/fhir';
+// Use WebChart server now
+const FHIR_BASE_URL = 'https://navya.webch.art/webchart.cgi/fhir';
 
-const FHIR_BASE_URL = 'https://r4.smarthealthit.org';
-// helper to load a JSON fixture from disk
+// ✅ Helper to load the saved token from token.txt
+function getAuthHeaders() {
+  const tokenPath = path.join(__dirname, 'token.txt');
+  let token = '';
+  try {
+    token = fs.readFileSync(tokenPath, 'utf8').trim();
+  } catch (err) {
+    console.warn('⚠️ Access token not found. Did you login?');
+  }
+
+  return {
+    'Content-Type': 'application/fhir+json',
+    ...(token && { 'Authorization': `Bearer ${token}` })
+  };
+}
+
+// ✅ Helper to load a JSON fixture
 function loadFixture(fileName) {
   const fullPath = path.join(__dirname, fileName);
   return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
 }
 
-/**
- * Create a new Patient.
- * @param {object} [patientData]  optional override
- * @returns {Promise<string>}     the new Patient.id
- */
+// ✅ Create Patient
 async function createPatient(patientData) {
-  const hasCustom = patientData && Object.keys(patientData).length > 0;
-  const payload   = hasCustom
+  const payload = patientData && Object.keys(patientData).length > 0
     ? patientData
     : loadFixture('patient.fhir.json');
 
-  const res = await axios.post(
-    `${FHIR_BASE_URL}/Patient`,
-    payload,
-    { headers: { 'Content-Type': 'application/fhir+json' } }
-  );
+  const res = await axios.post(`${FHIR_BASE_URL}/Patient`, payload, {
+    headers: getAuthHeaders()
+  });
+
   return res.data.id;
 }
 
-/**
- * Create an Observation for a given patient.
- * @param {string} patientId
- * @param {object} [obsData]     optional override
- * @returns {Promise<string>}    the new Observation.id
- */
+// ✅ Create Observation
 async function createObservation(patientId, obsData) {
-  const hasCustom = obsData && Object.keys(obsData).length > 0;
-  const observation = hasCustom
+  const observation = obsData && Object.keys(obsData).length > 0
     ? obsData
     : loadFixture('observation.fhir.json');
 
-  // attach to the correct patient
   observation.subject = { reference: `Patient/${patientId}` };
 
-  const res = await axios.post(
-    `${FHIR_BASE_URL}/Observation`,
-    observation,
-    { headers: { 'Content-Type': 'application/fhir+json' } }
-  );
+  const res = await axios.post(`${FHIR_BASE_URL}/Observation`, observation, {
+    headers: getAuthHeaders()
+  });
+
   return res.data.id;
 }
 
-/**
- * Fetch a Patient resource.
- * @param {string} id
- * @returns {Promise<object>} the Patient resource JSON
- */
+// ✅ Get Patient
 async function getPatient(id) {
-  const res = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`);
+  const res = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`, {
+    headers: getAuthHeaders()
+  });
   return res.data;
 }
 
-/**
- * Search for Patients by name.
- * @param {string} name
- * @returns {Promise<object[]>} array of Patient resources
- */
+// ✅ Search Patient
 async function searchPatientByName(name) {
   const res = await axios.get(`${FHIR_BASE_URL}/Patient`, {
-    params: { name }
+    params: { name },
+    headers: getAuthHeaders()
   });
   return res.data.entry?.map(e => e.resource) || [];
 }
 
-/**
- * Replace the Patient’s telecom array with a new mobile phone.
- * @param {string} id
- * @param {string} newPhone
- * @returns {Promise<object>} the updated Patient resource
- */
+// ✅ Update Patient Phone
 async function updatePatientPhone(id, newPhone) {
-  const getRes     = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`);
-  const patientObj = getRes.data;
+  const getRes = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`, {
+    headers: getAuthHeaders()
+  });
 
+  const patientObj = getRes.data;
   patientObj.telecom = [{
     system: 'phone',
-    use:    'mobile',
-    value:  newPhone
+    use: 'mobile',
+    value: newPhone
   }];
 
-  const putRes = await axios.put(
-    `${FHIR_BASE_URL}/Patient/${id}`,
-    patientObj,
-    { headers: { 'Content-Type': 'application/fhir+json' } }
-  );
+  const putRes = await axios.put(`${FHIR_BASE_URL}/Patient/${id}`, patientObj, {
+    headers: getAuthHeaders()
+  });
+
   return putRes.data;
 }
 
-/**
- * Delete a Patient by ID.
- * @param {string} id
- * @returns {Promise<boolean>}  true on success
- */
+// ✅ Delete Patient
 async function deletePatient(id) {
-  await axios.delete(`${FHIR_BASE_URL}/Patient/${id}`);
+  await axios.delete(`${FHIR_BASE_URL}/Patient/${id}`, {
+    headers: getAuthHeaders()
+  });
   return true;
 }
-/**
- * Search for Observations by Patient ID.
- * @param {string} patientId
- * @returns {Promise<object[]>} array of Observation resources
- */
+
+// ✅ Search Observations
 async function searchObservations(patientId) {
   const res = await axios.get(`${FHIR_BASE_URL}/Observation`, {
-    params: { subject: `Patient/${patientId}` }
+    params: { subject: `Patient/${patientId}` },
+    headers: getAuthHeaders()
   });
   return res.data.entry?.map(e => e.resource) || [];
 }

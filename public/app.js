@@ -11,6 +11,27 @@ document.getElementById('btnCreate').onclick = async () => {
   const data = await res.json();
   document.getElementById('createResult').textContent = 'Created ID: ' + data.id;
 };
+// SMART-on-FHIR Login Button Redirect
+document.getElementById('btnLogin').onclick = () => {
+  window.location.href = '/login';
+};
+
+// Check Login Status on Page Load
+async function checkLoginStatus() {
+  try {
+    const res = await fetch('/api/status');
+    const data = await res.json();
+    document.getElementById('loginStatus').textContent = data.loggedIn
+      ? '✅ Logged in with WebChart'
+      : '❌ Not logged in';
+  } catch (err) {
+    document.getElementById('loginStatus').textContent = '⚠️ Error checking login status';
+  }
+}
+
+// Run check on page load
+checkLoginStatus();
+
 
 // Upload Synthea Patient (from user file)
 document.getElementById('btnUploadSynthea').onclick = async () => {
