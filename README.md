@@ -1,30 +1,100 @@
-FHIR Client Project
-This project aims to explore and understand HL7 FHIR (Fast Healthcare Interoperability Resources) standards by implementing client-side JavaScript code to perform Create, Read, Update, and Delete (CRUD) operations on FHIR resources using RESTful APIs. The objective is to gain hands-on experience interacting with a FHIR server and building familiarity with FHIR data structures and schemas.
+ SynthChart Hub – Synthea + WebChart (SMART-on-FHIR)
+This project explores HL7 FHIR standards by building a full-stack SMART-on-FHIR web application that:
 
-Features
-Create FHIR resources (e.g., Patient, Observation) using HTTP POST
+Generates synthetic patients using Synthea
 
-Read resources via HTTP GET
+Performs CRUD operations on FHIR resources
 
-Update resources using HTTP PUT
+Authenticates with WebChart via SMART-on-FHIR
 
-Delete resources via HTTP DELETE
+Posts to a live FHIR server using OAuth2 bearer tokens
 
-Search for resources using query parameters
+✨ Features
+Feature	Description
+✅ SMART-on-FHIR Login	Uses WebChart OAuth2 to authenticate
+✅ Generate Patients	CLI integration with Synthea to create synthetic data
+✅ Upload Patients	Upload and POST a .json Synthea bundle
+✅ Create/Read/Update/Delete	Full CRUD for Patient and Observation
+✅ Custom Forms	Create patients and observations manually
+✅ Live Fetch	View and search patients or list observations
+✅ Auth Token Handling	Uses session token from WebChart and stores in token.txt
 
-Validate FHIR resource structures using fhir.schema.json
+🧠 Architecture
+Frontend:
 
-Configure Visual Studio Code for FHIR schema validation and auto-completion
+Vanilla JS (app.js)
 
-Tools Used
-Node.js for executing JavaScript code
+HTML UI (index.html)
 
-Axios for making HTTP requests
+Sends requests to Express backend
 
-Visual Studio Code with JSON schema support
+Backend:
 
-FHIR schema (fhir.schema.json) from HL7 for syntax checking
+Node.js with Express
 
-HAPI FHIR server (local Docker setup) for development and testing
+Handles Synthea execution, FHIR API proxying
 
-Insomnia for API testing and exploration
+Uses axios for API calls with Authorization header
+
+Reads token.txt for bearer token access
+
+🔐 SMART-on-FHIR Setup
+FHIR Endpoint: https://navya.webch.art/webchart.cgi/fhir/
+
+Client ID: ONC-Inferno
+
+Client Secret: provided via admin panel
+
+Redirect URI: http://localhost:3000/callback
+
+OAuth token is saved automatically to token.txt after login.
+
+🛠️ Tools Used
+Tool	Purpose
+Node.js + Express	Backend server
+Axios	API requests
+Synthea JAR	Generates fake patient FHIR bundles
+Visual Studio Code	JSON validation and dev
+Docker (Optional)	For local FHIR servers (e.g., HAPI-FHIR)
+WebChart	FHIR-compliant EHR platform
+Inferno	SMART-on-FHIR test harness for certification
+
+🧪 How to Use
+Install Dependencies
+
+bash
+Copy
+Edit
+npm install
+Run the Server
+
+bash
+Copy
+Edit
+node fhirServer.js
+Login to WebChart
+
+Click "Login via WebChart" on the web page
+
+You’ll be redirected to WebChart's login screen
+
+After successful login, token.txt is saved
+
+Generate a Patient
+
+Click "Generate Patient" to run Synthea
+
+Automatically extracts Patient resource and POSTs it
+
+Perform CRUD
+
+Use various forms/buttons to create/update/delete/search Patient and Observation
+
+🚧 Roadmap
+ Add support for additional FHIR resource types (Condition, AllergyIntolerance, etc.)
+
+ Better error messages + UI styling
+
+ Store tokens securely (not in plain token.txt)
+
+ Add test cases and deployable versio
