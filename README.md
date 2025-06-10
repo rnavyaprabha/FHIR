@@ -1,100 +1,88 @@
- SynthChart Hub – Synthea + WebChart (SMART-on-FHIR)
-This project explores HL7 FHIR standards by building a full-stack SMART-on-FHIR web application that:
+SynthChart Hub - Synthea + WebChart (FHIR Project)
+This project is a web application that helps you work with FHIR (Fast Healthcare Interoperability Resources) data. It connects to a real EHR system (WebChart) using SMART-on-FHIR login and allows you to create and manage patient data. It also uses Synthea to generate realistic synthetic patient data.
 
-Generates synthetic patients using Synthea
+What This App Can Do
+Login securely to WebChart using SMART-on-FHIR
 
-Performs CRUD operations on FHIR resources
+Generate fake patients using the Synthea CLI tool
 
-Authenticates with WebChart via SMART-on-FHIR
+Upload a Synthea-generated patient JSON file
 
-Posts to a live FHIR server using OAuth2 bearer tokens
+Create, view, update, and delete FHIR Patient resources
 
-✨ Features
-Feature	Description
-✅ SMART-on-FHIR Login	Uses WebChart OAuth2 to authenticate
-✅ Generate Patients	CLI integration with Synthea to create synthetic data
-✅ Upload Patients	Upload and POST a .json Synthea bundle
-✅ Create/Read/Update/Delete	Full CRUD for Patient and Observation
-✅ Custom Forms	Create patients and observations manually
-✅ Live Fetch	View and search patients or list observations
-✅ Auth Token Handling	Uses session token from WebChart and stores in token.txt
+Create and list Observation resources for a patient
 
-🧠 Architecture
-Frontend:
+Search for a patient by name
 
-Vanilla JS (app.js)
+View patient information by ID
 
-HTML UI (index.html)
+Use forms to create custom patients and observations
 
-Sends requests to Express backend
+How It Works
+The app uses Node.js and Express for the backend
 
-Backend:
+The frontend is written in plain HTML and JavaScript
 
-Node.js with Express
+Axios is used to send HTTP requests to the WebChart FHIR server
 
-Handles Synthea execution, FHIR API proxying
+OAuth2 login is handled through WebChart, and the access token is stored in a local file called token.txt
 
-Uses axios for API calls with Authorization header
+After logging in, all data is sent to the WebChart FHIR server using that token
 
-Reads token.txt for bearer token access
+Synthea runs in the background when you click "Generate Patient" and gives you fake FHIR patient data
 
-🔐 SMART-on-FHIR Setup
-FHIR Endpoint: https://navya.webch.art/webchart.cgi/fhir/
+Technologies Used
+Node.js for backend server
 
-Client ID: ONC-Inferno
+Express for handling API routes
 
-Client Secret: provided via admin panel
+Axios for HTTP requests
 
-Redirect URI: http://localhost:3000/callback
+Synthea for generating fake patient data
 
-OAuth token is saved automatically to token.txt after login.
+WebChart (EHR system) as the FHIR server
 
-🛠️ Tools Used
-Tool	Purpose
-Node.js + Express	Backend server
-Axios	API requests
-Synthea JAR	Generates fake patient FHIR bundles
-Visual Studio Code	JSON validation and dev
-Docker (Optional)	For local FHIR servers (e.g., HAPI-FHIR)
-WebChart	FHIR-compliant EHR platform
-Inferno	SMART-on-FHIR test harness for certification
+HTML, CSS, and JavaScript for the frontend
 
-🧪 How to Use
-Install Dependencies
+How to Run the Project
+Install Node.js if not already installed
 
-bash
-Copy
-Edit
-npm install
-Run the Server
+Run npm install to install all dependencies
 
-bash
-Copy
-Edit
-node fhirServer.js
-Login to WebChart
+Run the app using node fhirServer.js
 
-Click "Login via WebChart" on the web page
+Open your browser and go to http://localhost:3000
 
-You’ll be redirected to WebChart's login screen
+Click the "Login via WebChart" button to log in
 
-After successful login, token.txt is saved
+Use the buttons and forms to generate or upload patients and perform other actions
 
-Generate a Patient
+Requirements
+WebChart credentials (username and password)
 
-Click "Generate Patient" to run Synthea
+Access permission to use the FHIR Login Trust in WebChart
 
-Automatically extracts Patient resource and POSTs it
+A registered Client ID and Redirect URI for SMART-on-FHIR login (already set to ONC-Inferno for testing)
 
-Perform CRUD
+Synthea JAR file placed in the same directory as your server file
 
-Use various forms/buttons to create/update/delete/search Patient and Observation
+Important Notes
+After login, your token is saved to token.txt and used for all future FHIR requests
 
-🚧 Roadmap
- Add support for additional FHIR resource types (Condition, AllergyIntolerance, etc.)
+If the login button doesn’t work or the app doesn’t post data, you might not have permission in WebChart
 
- Better error messages + UI styling
+You can only post data after successful login
 
- Store tokens securely (not in plain token.txt)
+What You Can Improve or Add Next
+Add support for more FHIR resource types like Condition, Allergy, or Medication
 
- Add test cases and deployable versio
+Store tokens more securely
+
+Add better error messages for the user
+
+Add styles to make the UI more user-friendly
+
+Run SMART-on-FHIR certification tests using Inferno
+
+Conclusion
+This project is useful for developers who want to learn how to integrate synthetic FHIR data with a real EHR system using secure login methods. It is also a good way to practice using APIs and working with healthcare data standards.
