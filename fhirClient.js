@@ -3,8 +3,8 @@ const path = require('path');
 const axios = require('axios');
 
 // Use WebChart server now
-const FHIR_BASE_URL = 'https://navya.webch.art/webchart.cgi/fhir';
-
+//const FHIR_BASE_URL = 'https://navya.webch.art/webchart.cgi/fhir';
+const FHIR_BASE_URL ='https://r4.smarthealthit.org';
 // ✅ Helper to load the saved token from token.txt
 function getAuthHeaders() {
   const tokenPath = path.join(__dirname, 'token.txt');

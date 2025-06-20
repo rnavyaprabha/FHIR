@@ -7,8 +7,7 @@ const axios = require('axios');
 const os = require('os');
 const { exec } = require('child_process'); 
 const fs = require('fs');
-
-//const FHIR_BASE_URL = 'https://r4.smarthealthit.org';
+const FHIR_BASE_URL = 'https://r4.smarthealthit.org';
 const SYNTHEA_JAR = path.join(__dirname, 'synthea-with-dependencies.jar');
 
 const {
@@ -78,9 +77,10 @@ app.post('/api/generate-patient', async (req, res) => {
   });
 });
 // === SMART-on-FHIR Auth Settings ===
-const CLIENT_ID = 'ONC-Inferno';
+const CLIENT_ID = 'SynthChartHub';
 const CLIENT_SECRET = '8ee57956-1582-11f0-a114-7a8166fc39f0';
 const REDIRECT_URI = 'http://localhost:3000/callback';
+
 
 const AUTH_URL = 'https://navya.webch.art/webchart.cgi/oauth/authorize';
 const TOKEN_URL = 'https://navya.webch.art/webchart.cgi/oauth/token';
