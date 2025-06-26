@@ -16,20 +16,17 @@ document.getElementById('btnLogin').onclick = () => {
   window.location.href = '/login';
 };
 
-// Check Login Status on Page Load
 async function checkLoginStatus() {
-  try {
-    const res = await fetch('/api/status');
-    const data = await res.json();
-    document.getElementById('loginStatus').textContent = data.loggedIn
-      ? '✅ Logged in with WebChart'
-      : '❌ Not logged in';
-  } catch (err) {
-    document.getElementById('loginStatus').textContent = '⚠️ Error checking login status';
+  const res = await fetch('/api/status');
+  const data = await res.json();
+  const statusDiv = document.getElementById('loginStatus');
+  if (data.loggedIn) {
+    statusDiv.textContent = '✅ Successfully logged in!';
+  } else {
+    statusDiv.textContent = '❌ Not logged in.';
   }
 }
 
-// Run check on page load
 checkLoginStatus();
 
 
