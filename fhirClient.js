@@ -2,119 +2,88 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 
-// Use WebChart server now
-//const FHIR_BASE_URL = 'https://navya.webch.art/webchart.cgi/fhir';
-const FHIR_BASE_URL ='https://r4.smarthealthit.org';
-// ✅ Helper to load the saved token from token.txt
+const FHIR_BASE_URL = 'https://nrajappa.dev.webchart.app/webchart.cgi/fhir';
+
+// Helper to load the saved token from token.txt
 function getAuthHeaders() {
   const tokenPath = path.join(__dirname, 'token.txt');
   let token = '';
   try {
     token = fs.readFileSync(tokenPath, 'utf8').trim();
-  } catch (err) {
-    console.warn('⚠️ Access token not found. Did you login?');
-  }
-
+  } catch {}
   return {
     'Content-Type': 'application/fhir+json',
     ...(token && { 'Authorization': `Bearer ${token}` })
   };
 }
 
-// ✅ Helper to load a JSON fixture
-function loadFixture(fileName) {
-  const fullPath = path.join(__dirname, fileName);
-  return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-}
-
-// ✅ Create Patient
+// Create Patient
 async function createPatient(patientData) {
-  const payload = patientData && Object.keys(patientData).length > 0
-    ? patientData
-    : loadFixture('patient.fhir.json');
-
-  const res = await axios.post(`${FHIR_BASE_URL}/Patient`, payload, {
-    headers: getAuthHeaders()
-  });
-
+  const headers = getAuthHeaders();
+  const res = await axios.post(`${FHIR_BASE_URL}/Patient`, patientData, { headers });
   return res.data.id;
 }
 
-// ✅ Create Observation
-async function createObservation(patientId, obsData) {
-  const observation = obsData && Object.keys(obsData).length > 0
-    ? obsData
-    : loadFixture('observation.fhir.json');
-
-  observation.subject = { reference: `Patient/${patientId}` };
-
-  const res = await axios.post(`${FHIR_BASE_URL}/Observation`, observation, {
-    headers: getAuthHeaders()
-  });
-
-  return res.data.id;
-}
-
-// ✅ Get Patient
+// Get Patient by ID
 async function getPatient(id) {
-  const res = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`, {
-    headers: getAuthHeaders()
-  });
+  const headers = getAuthHeaders();
+  const res = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`, { headers });
   return res.data;
 }
 
-// ✅ Search Patient
+// Search Patient by Name
 async function searchPatientByName(name) {
-  const res = await axios.get(`${FHIR_BASE_URL}/Patient`, {
-    params: { name },
-    headers: getAuthHeaders()
-  });
-  return res.data.entry?.map(e => e.resource) || [];
+  const headers = getAuthHeaders();
+  const res = await axios.get(`${FHIR_BASE_URL}/Patient?name=${encodeURIComponent(name)}`, { headers });
+  return res.data.entry ? res.data.entry.map(e => e.resource) : [];
 }
 
-// ✅ Update Patient Phone
+// Update Patient Phone
 async function updatePatientPhone(id, newPhone) {
-  const getRes = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`, {
-    headers: getAuthHeaders()
-  });
-
-  const patientObj = getRes.data;
-  patientObj.telecom = [{
-    system: 'phone',
-    use: 'mobile',
-    value: newPhone
-  }];
-
-  const putRes = await axios.put(`${FHIR_BASE_URL}/Patient/${id}`, patientObj, {
-    headers: getAuthHeaders()
-  });
-
-  return putRes.data;
+  const headers = getAuthHeaders();
+  // Get the patient first
+  const patientRes = await axios.get(`${FHIR_BASE_URL}/Patient/${id}`, { headers });
+  const patient = patientRes.data;
+  // Update phone
+  patient.telecom = patient.telecom || [];
+  const phoneEntry = patient.telecom.find(t => t.system === 'phone');
+  if (phoneEntry) {
+    phoneEntry.value = newPhone;
+  } else {
+    patient.telecom.push({ system: 'phone', value: newPhone });
+  }
+  // Update patient
+  const res = await axios.put(`${FHIR_BASE_URL}/Patient/${id}`, patient, { headers });
+  return res.data;
 }
 
-// ✅ Delete Patient
+// Delete Patient
 async function deletePatient(id) {
-  await axios.delete(`${FHIR_BASE_URL}/Patient/${id}`, {
-    headers: getAuthHeaders()
-  });
-  return true;
+  const headers = getAuthHeaders();
+  await axios.delete(`${FHIR_BASE_URL}/Patient/${id}`, { headers });
 }
 
-// ✅ Search Observations
+// Create Observation
+async function createObservation(patientId, obsData) {
+  const headers = getAuthHeaders();
+  obsData.subject = { reference: `Patient/${patientId}` };
+  const res = await axios.post(`${FHIR_BASE_URL}/Observation`, obsData, { headers });
+  return res.data.id;
+}
+
+// List Observations for a Patient
 async function searchObservations(patientId) {
-  const res = await axios.get(`${FHIR_BASE_URL}/Observation`, {
-    params: { subject: `Patient/${patientId}` },
-    headers: getAuthHeaders()
-  });
-  return res.data.entry?.map(e => e.resource) || [];
+  const headers = getAuthHeaders();
+  const res = await axios.get(`${FHIR_BASE_URL}/Observation?subject=Patient/${patientId}`, { headers });
+  return res.data.entry ? res.data.entry.map(e => e.resource) : [];
 }
 
 module.exports = {
   createPatient,
-  createObservation,
   getPatient,
-  searchObservations,
   searchPatientByName,
   updatePatientPhone,
-  deletePatient
+  deletePatient,
+  createObservation,
+  searchObservations
 };
