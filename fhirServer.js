@@ -21,12 +21,12 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // === SMART-on-FHIR Auth Settings ===
-const CLIENT_ID = 'SynthChartHub';
-const CLIENT_SECRET = '8ee57956-1582-11f0-a114-7a8166fc39f0';
-const REDIRECT_URI = 'http://localhost:3000/callback';
-const FHIR_BASE_URL = 'https://nrajappa.dev.webchart.app/webchart.cgi/fhir';
-const AUTH_URL = 'https://nrajappa.dev.webchart.app/webchart.cgi/oauth/authorize';
-const TOKEN_URL = 'https://nrajappa.dev.webchart.app/webchart.cgi/oauth/token';
+const CLIENT_ID = 'MIE-localhost';
+const CLIENT_SECRET = 'ABC123DEF456GHI789J0';
+const REDIRECT_URI = 'http://localhost:3000/code';
+const FHIR_BASE_URL = 'https://navya.webchartnow.com/';
+const AUTH_URL = 'https://navya.webchartnow.com/webchart.cgi/oauth/authorize';
+const TOKEN_URL = 'https://navya.webchartnow.com/webchart.cgi/oauth/token';
 
 // SMART-on-FHIR Login Redirect
 app.get('/login', (req, res) => {
