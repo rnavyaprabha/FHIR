@@ -1,0 +1,694 @@
+{
+  "resourceType": "Bundle",
+  "type": "batch",
+  "entry": [ {
+    "fullUrl": "urn:uuid:f4987087-b756-3fa7-ba10-43c246663274",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "f4987087-b756-3fa7-ba10-43c246663274",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 1
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 0
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "f4987087-b756-3fa7-ba10-43c246663274"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "SUMMIT URGENT CARE, PS",
+      "telecom": [ {
+        "system": "phone",
+        "value": "4259033141"
+      } ],
+      "address": [ {
+        "line": [ "3900 FACTORIA BLVD SE" ],
+        "city": "BELLEVUE",
+        "state": "WA",
+        "postalCode": "980061234",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|f4987087-b756-3fa7-ba10-43c246663274"
+    }
+  }, {
+    "fullUrl": "urn:uuid:bdce6854-077e-3e7b-82f7-307c3179b553",
+    "resource": {
+      "resourceType": "Location",
+      "id": "bdce6854-077e-3e7b-82f7-307c3179b553",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "bdce6854-077e-3e7b-82f7-307c3179b553"
+      } ],
+      "status": "active",
+      "name": "SUMMIT URGENT CARE, PS",
+      "telecom": [ {
+        "system": "phone",
+        "value": "4259033141"
+      } ],
+      "address": {
+        "line": [ "3900 FACTORIA BLVD SE" ],
+        "city": "BELLEVUE",
+        "state": "WA",
+        "postalCode": "980061234",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.168751,
+        "latitude": 47.575395
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "f4987087-b756-3fa7-ba10-43c246663274"
+        },
+        "display": "SUMMIT URGENT CARE, PS"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|bdce6854-077e-3e7b-82f7-307c3179b553"
+    }
+  }, {
+    "fullUrl": "urn:uuid:664e3522-0a62-3f2a-a33c-a6a697dea82d",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "664e3522-0a62-3f2a-a33c-a6a697dea82d",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 1
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 0
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "664e3522-0a62-3f2a-a33c-a6a697dea82d"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "KINDRED HOSPICE",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2065251090"
+      } ],
+      "address": [ {
+        "line": [ "115 NE 100TH ST BLDG A SUITE 210" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981152022",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|664e3522-0a62-3f2a-a33c-a6a697dea82d"
+    }
+  }, {
+    "fullUrl": "urn:uuid:41e6a8e8-90bd-3523-89d4-8dc001572dd9",
+    "resource": {
+      "resourceType": "Location",
+      "id": "41e6a8e8-90bd-3523-89d4-8dc001572dd9",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "41e6a8e8-90bd-3523-89d4-8dc001572dd9"
+      } ],
+      "status": "active",
+      "name": "KINDRED HOSPICE",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2065251090"
+      } ],
+      "address": {
+        "line": [ "115 NE 100TH ST BLDG A SUITE 210" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981152022",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.330062,
+        "latitude": 47.6038321
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "664e3522-0a62-3f2a-a33c-a6a697dea82d"
+        },
+        "display": "KINDRED HOSPICE"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|41e6a8e8-90bd-3523-89d4-8dc001572dd9"
+    }
+  }, {
+    "fullUrl": "urn:uuid:0c12ddb4-d716-3dbc-beac-59bc39148050",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "0c12ddb4-d716-3dbc-beac-59bc39148050",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 1
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/bed-count-extension",
+        "valueInteger": 130
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "0c12ddb4-d716-3dbc-beac-59bc39148050"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "QUEEN ANNE HEALTHCARE",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2062847012"
+      } ],
+      "address": [ {
+        "line": [ "2717 DEXTER AVENUE NORTH" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981091914",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|0c12ddb4-d716-3dbc-beac-59bc39148050"
+    }
+  }, {
+    "fullUrl": "urn:uuid:e6e39278-b25e-3fb7-9f61-15faab577444",
+    "resource": {
+      "resourceType": "Location",
+      "id": "e6e39278-b25e-3fb7-9f61-15faab577444",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "e6e39278-b25e-3fb7-9f61-15faab577444"
+      } ],
+      "status": "active",
+      "name": "QUEEN ANNE HEALTHCARE",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2062847012"
+      } ],
+      "address": {
+        "line": [ "2717 DEXTER AVENUE NORTH" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981091914",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.3479125,
+        "latitude": 47.644096
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "0c12ddb4-d716-3dbc-beac-59bc39148050"
+        },
+        "display": "QUEEN ANNE HEALTHCARE"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|e6e39278-b25e-3fb7-9f61-15faab577444"
+    }
+  }, {
+    "fullUrl": "urn:uuid:c1b679b9-588f-3039-a044-b4368a8a953c",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "c1b679b9-588f-3039-a044-b4368a8a953c",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 11
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 37
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 1
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 7
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "c1b679b9-588f-3039-a044-b4368a8a953c"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "SALMON BAY FAMILY MEDICINE PLLC",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2067816300"
+      } ],
+      "address": [ {
+        "line": [ "1801 NW MARKET ST" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981073909",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|c1b679b9-588f-3039-a044-b4368a8a953c"
+    }
+  }, {
+    "fullUrl": "urn:uuid:1e9ba6cd-72c5-3b6f-93b2-be27774c4f19",
+    "resource": {
+      "resourceType": "Location",
+      "id": "1e9ba6cd-72c5-3b6f-93b2-be27774c4f19",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "1e9ba6cd-72c5-3b6f-93b2-be27774c4f19"
+      } ],
+      "status": "active",
+      "name": "SALMON BAY FAMILY MEDICINE PLLC",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2067816300"
+      } ],
+      "address": {
+        "line": [ "1801 NW MARKET ST" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981073909",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.3802073,
+        "latitude": 47.668195850000004
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "c1b679b9-588f-3039-a044-b4368a8a953c"
+        },
+        "display": "SALMON BAY FAMILY MEDICINE PLLC"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|1e9ba6cd-72c5-3b6f-93b2-be27774c4f19"
+    }
+  }, {
+    "fullUrl": "urn:uuid:d824b58d-07e1-3daa-8d47-24544843fb4c",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "d824b58d-07e1-3daa-8d47-24544843fb4c",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 21
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 40
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 5
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 7
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "d824b58d-07e1-3daa-8d47-24544843fb4c"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "RAINIER BEACH MEDICAL CLINIC",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2067228444"
+      } ],
+      "address": [ {
+        "line": [ "9245 RAINIER AVENUE SOUTH" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981185569",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|d824b58d-07e1-3daa-8d47-24544843fb4c"
+    }
+  }, {
+    "fullUrl": "urn:uuid:e300d02c-8fef-35f6-9bd8-609a2ee90428",
+    "resource": {
+      "resourceType": "Location",
+      "id": "e300d02c-8fef-35f6-9bd8-609a2ee90428",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "e300d02c-8fef-35f6-9bd8-609a2ee90428"
+      } ],
+      "status": "active",
+      "name": "RAINIER BEACH MEDICAL CLINIC",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2067228444"
+      } ],
+      "address": {
+        "line": [ "9245 RAINIER AVENUE SOUTH" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981185569",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.2693467,
+        "latitude": 47.5195022
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "d824b58d-07e1-3daa-8d47-24544843fb4c"
+        },
+        "display": "RAINIER BEACH MEDICAL CLINIC"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|e300d02c-8fef-35f6-9bd8-609a2ee90428"
+    }
+  }, {
+    "fullUrl": "urn:uuid:1a990abe-e6d1-3594-ae3f-5a34f8d2136d",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "1a990abe-e6d1-3594-ae3f-5a34f8d2136d",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 2
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 0
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "1a990abe-e6d1-3594-ae3f-5a34f8d2136d"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "SWEDISH HEALTH SERVICES",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2063202230"
+      } ],
+      "address": [ {
+        "line": [ "5300 TALLMAN AVE NW" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981073932",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|1a990abe-e6d1-3594-ae3f-5a34f8d2136d"
+    }
+  }, {
+    "fullUrl": "urn:uuid:0a2f3bf3-3be2-379d-a647-3b9c117e5f0c",
+    "resource": {
+      "resourceType": "Location",
+      "id": "0a2f3bf3-3be2-379d-a647-3b9c117e5f0c",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "0a2f3bf3-3be2-379d-a647-3b9c117e5f0c"
+      } ],
+      "status": "active",
+      "name": "SWEDISH HEALTH SERVICES",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2063202230"
+      } ],
+      "address": {
+        "line": [ "5300 TALLMAN AVE NW" ],
+        "city": "SEATTLE",
+        "state": "WA",
+        "postalCode": "981073932",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.38007941737797,
+        "latitude": 47.66758725
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "1a990abe-e6d1-3594-ae3f-5a34f8d2136d"
+        },
+        "display": "SWEDISH HEALTH SERVICES"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|0a2f3bf3-3be2-379d-a647-3b9c117e5f0c"
+    }
+  }, {
+    "fullUrl": "urn:uuid:3c80ff6f-b2ee-3fd9-9b7c-5771f7ec987e",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "3c80ff6f-b2ee-3fd9-9b7c-5771f7ec987e",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization" ]
+      },
+      "extension": [ {
+        "url": "http://synthetichealth.github.io/synthea/utilization-encounters-extension",
+        "valueInteger": 10
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-procedures-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-labs-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/utilization-prescriptions-extension",
+        "valueInteger": 0
+      }, {
+        "url": "http://synthetichealth.github.io/synthea/bed-count-extension",
+        "valueInteger": 135
+      } ],
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "3c80ff6f-b2ee-3fd9-9b7c-5771f7ec987e"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "prov",
+          "display": "Healthcare Provider"
+        } ],
+        "text": "Healthcare Provider"
+      } ],
+      "name": "CASCADE BEHAVIORAL HOSPITAL",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2062440180"
+      } ],
+      "address": [ {
+        "line": [ "12844 MILITARY ROAD SOUTH" ],
+        "city": "TUKWILA",
+        "state": "WA",
+        "postalCode": "981683045",
+        "country": "US"
+      } ]
+    },
+    "request": {
+      "method": "POST",
+      "url": "Organization",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|3c80ff6f-b2ee-3fd9-9b7c-5771f7ec987e"
+    }
+  }, {
+    "fullUrl": "urn:uuid:1d76d9e7-796e-30bd-9516-e46938f51ce1",
+    "resource": {
+      "resourceType": "Location",
+      "id": "1d76d9e7-796e-30bd-9516-e46938f51ce1",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location" ]
+      },
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "1d76d9e7-796e-30bd-9516-e46938f51ce1"
+      } ],
+      "status": "active",
+      "name": "CASCADE BEHAVIORAL HOSPITAL",
+      "telecom": [ {
+        "system": "phone",
+        "value": "2062440180"
+      } ],
+      "address": {
+        "line": [ "12844 MILITARY ROAD SOUTH" ],
+        "city": "TUKWILA",
+        "state": "WA",
+        "postalCode": "981683045",
+        "country": "US"
+      },
+      "position": {
+        "longitude": -122.29591767794727,
+        "latitude": 47.48729935
+      },
+      "managingOrganization": {
+        "identifier": {
+          "system": "https://github.com/synthetichealth/synthea",
+          "value": "3c80ff6f-b2ee-3fd9-9b7c-5771f7ec987e"
+        },
+        "display": "CASCADE BEHAVIORAL HOSPITAL"
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|1d76d9e7-796e-30bd-9516-e46938f51ce1"
+    }
+  }, {
+    "fullUrl": "urn:uuid:bb1ad573-19b8-9cd8-68fb-0e6f684df992",
+    "resource": {
+      "resourceType": "Location",
+      "id": "bb1ad573-19b8-9cd8-68fb-0e6f684df992",
+      "identifier": [ {
+        "system": "https://github.com/synthetichealth/synthea",
+        "value": "bb1ad573-19b8-9cd8-68fb-0e6f684df992"
+      } ],
+      "status": "active",
+      "description": "Patient's Home",
+      "mode": "kind",
+      "physicalType": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+          "code": "ho",
+          "display": "House"
+        } ]
+      }
+    },
+    "request": {
+      "method": "POST",
+      "url": "Location",
+      "ifNoneExist": "identifier=https://github.com/synthetichealth/synthea|bb1ad573-19b8-9cd8-68fb-0e6f684df992"
+    }
+  } ]
+}
